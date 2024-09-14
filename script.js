@@ -6,6 +6,11 @@ const clearButton = document.getElementById('clear');
 const output = document.getElementById('output');
 let isError = false;
 
+// Load saved data from localStorage on page load
+document.addEventListener('DOMContentLoaded', () => {
+  loadSavedData();
+});
+
 function cleanInputString(str) {
   const regex = /[+-\s]/g;
   return str.replace(regex, '');
@@ -29,7 +34,21 @@ function addEntry() {
     id="${entryDropdown.value}-${entryNumber}-calories"
     placeholder="Calorie"
   />`;
+  
   targetInputContainer.insertAdjacentHTML('beforeend', HTMLString);
+  let entry = document.querySelectorAll(".rounded");
+
+
+  entry.forEach(input => input.addEventListener("focus", () => {
+      // console.log("saved");
+
+      saveData();
+  }))
+  // Save new entry to localStorage
+  saveData();
+
+  // Save new entry to localStorage
+  saveData();
 }
 
 function calculateCalories(e) {
@@ -65,6 +84,9 @@ function calculateCalories(e) {
   `;
 
   output.classList.remove('hide');
+
+  // Save data to localStorage
+  saveData();
 }
 
 function getCaloriesFromInputs(list) {
@@ -94,6 +116,61 @@ function clearForm() {
   budgetNumberInput.value = '';
   output.innerText = '';
   output.classList.add('hide');
+
+  // Clear localStorage
+  localStorage.clear();
+}
+
+function saveData() {
+  const data = {
+    budget: budgetNumberInput.value,
+    entries: {}
+  };
+
+  const inputContainers = Array.from(document.querySelectorAll('.input-container'));
+  inputContainers.forEach(container => {
+    const inputs = container.querySelectorAll('input');
+    inputs.forEach(input => {
+      data.entries[input.id] = input.value;
+    });
+  });
+
+  localStorage.setItem('calorieCounterData', JSON.stringify(data));
+}
+
+function loadSavedData() {
+  const savedData = JSON.parse(localStorage.getItem('calorieCounterData'));
+  if (!savedData) return;
+  console.log(savedData);
+  
+
+  // Set budget input value
+  budgetNumberInput.value = savedData.budget || '';
+
+  // Iterate over saved entries and recreate them
+  for (const [id, value] of Object.entries(savedData.entries)) {
+    const containerId = id.split('-')[0]; 
+    const targetInputContainer = document.querySelector(`#${containerId} .input-container`);
+
+    // Check if the input field already exists; if not, create it
+    if (!document.getElementById(id)) {
+      const entryNumber = targetInputContainer.querySelectorAll('input[type="text"]').length + 1;
+      const HTMLString = `
+      <label for="${containerId}-${entryNumber}-name">Voce ${entryNumber} Nome</label>
+      <input class="rounded border border-opacity-10" type="text" id="${containerId}-${entryNumber}-name" placeholder="Nome" />
+      <label for="${containerId}-${entryNumber}-calories">Voce ${entryNumber} Calorie</label>
+      <input class="rounded border border-opacity-10"
+        type="number"
+        min="0"
+        id="${containerId}-${entryNumber}-calories"
+        placeholder="Calorie"
+      />`;
+      targetInputContainer.insertAdjacentHTML('beforeend', HTMLString);
+    }
+
+    // Set the input field value
+    document.getElementById(id).value = value;
+  }
 }
 
 addEntryButton.addEventListener("click", addEntry);
