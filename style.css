@@ -1,0 +1,93 @@
+:root {
+    --light-grey: #bfc5ca;
+    --dark-blue: #0a0a23;
+    --fcc-blue: #1b1b32;
+    --light-yellow: #fecc4c;
+    --dark-yellow: #feac32;
+    --light-pink: #ffadad;
+    --dark-red: #850000;
+    --light-green: #acd157;
+  }
+  
+  body {
+    font-family: "Lato", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    background: linear-gradient(to top,#464695, #754dc4);
+    height:auto ;
+    color: var(--dark-blue);
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 680px;
+  }
+  
+  h1,
+  .container,
+  .output {
+    margin: 20px auto;
+  }
+  
+  label,
+  legend {
+    font-weight: bold;
+  }
+  
+  .input-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  button {
+    cursor: pointer;
+    text-decoration: none;
+    background-color: var(--light-yellow);
+    border: 2px solid var(--dark-yellow);
+  }
+  
+  button,
+  input,
+  select {
+    min-height: 24px;
+    color: var(--dark-blue);
+  }
+
+  #budget{
+    min-width: 250px;
+  }
+  
+  fieldset,
+  label,
+  button,
+  input,
+  select {
+    margin-bottom: 10px;
+  }
+  
+  .output {
+    border: 2px solid var(--dark-yellow);
+    border-radius: 30px;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  .output span {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  
+  .surplus {
+    color: var(--light-pink);
+  }
+  
+  .deficit {
+    color: var(--light-green);
+  }

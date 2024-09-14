@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Conta Calorie</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <h1>Contatore Calorie</h1>
+        <div class="container">
+            <form id="calorie-counter">
+                <label for="budget">Budget</label>
+                <input class="rounded border border-opacity-10" type="number" min="0" id="budget" placeholder="Budget calorico giornaliero" required />
+                <fieldset id="breakfast">
+                    <legend>Colazione</legend>
+                    <div class="input-container"></div>
+                </fieldset>
+                <fieldset id="lunch">
+                    <legend>Pranzo</legend>
+                    <div class="input-container"></div>
+                </fieldset>
+                <fieldset id="dinner">
+                    <legend>Cena</legend>
+                    <div class="input-container"></div>
+                </fieldset>
+                <fieldset id="snacks">
+                    <legend>Spuntini</legend>
+                    <div class="input-container"></div>
+                </fieldset>
+                <fieldset id="exercise">
+                    <legend>Esercizio</legend>
+                    <div class="input-container"></div>
+                </fieldset>
+                <div class="controls">
+                    <span>
+                        <label for="entry-dropdown">Aggiungi cibo o esercizio:</label>
+                        <select id="entry-dropdown" name="options">
+                            <option value="breakfast" selected>Colazione</option>
+                            <option value="lunch">Pranzo</option>
+                            <option value="dinner">Cena</option>
+                            <option value="snacks">Spuntini</option>
+                            <option value="exercise">Esercizio</option>
+                        </select>
+                        <button type="button" id="add-entry">Aggiungi Voce</button>
+                    </span>
+                </div>
+                <div>
+                    <button type="submit">
+                        Calcola Calorie Rimanenti
+                    </button>
+                    <button type="button" id="clear">Cancella</button>
+                </div>
+            </form>
+            <div id="output" class="output hide"></div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
